@@ -1,0 +1,18 @@
+# Dependencies
+node_modules
+
+# Next
+.next
+out
+
+# Production
+build
+
+# Environment
+.env
+
+# Typescript
+next-env.d.ts
+
+# Docker
+.devcontainer
