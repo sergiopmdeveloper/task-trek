@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import React from 'react'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], preload: true })
 
 export const metadata: Metadata = {
 	title: 'Task trek',
