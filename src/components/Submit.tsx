@@ -11,7 +11,7 @@ export default function Submit() {
 
 	return (
 		<button
-			className="rounded bg-theme-yellow px-1.5 py-1 text-theme-white"
+			className="rounded bg-theme-yellow px-1.5 py-1 text-theme-white hover:brightness-75"
 			type="submit"
 			disabled={pending}
 		>
