@@ -1,6 +1,6 @@
 /**
- * Renders the home page component.
- * @returns The rendered page component.
+ * Home page component.
+ * @returns The page component.
  */
 export default function Page() {
 	return (
