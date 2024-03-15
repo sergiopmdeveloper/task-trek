@@ -6,12 +6,14 @@ const config: Config = {
 		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
 	],
 	theme: {
-		colors: {
-			'theme-black': '#000000',
-			'theme-blue': '#14213D',
-			'theme-yellow': '#FCA311',
-			'theme-gray': '#E5E5E5',
-			'theme-white': '#FFFFFF',
+		extend: {
+			colors: {
+				'theme-black': '#000000',
+				'theme-blue': '#14213D',
+				'theme-yellow': '#FCA311',
+				'theme-gray': '#E5E5E5',
+				'theme-white': '#FFFFFF',
+			},
 		},
 	},
 }
