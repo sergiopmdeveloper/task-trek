@@ -1,6 +1,7 @@
 'use client'
 
 import signUp from '@/actions/sign-up'
+import Error from '@/components/Error'
 import Input from '@/components/Input'
 import Label from '@/components/Label'
 import Submit from '@/components/Submit'
@@ -30,32 +31,31 @@ export default function Page() {
 					<div className="flex flex-col gap-2">
 						<Label htmlFor="name">Name</Label>
 						<Input
+							errors={formState.name}
 							name="name"
 							id="name"
 							type="text"
 							placeholder="Name..."
 							autoComplete="name"
 						/>
-						{formState.name.length > 0 && (
-							<span className="text-xs text-red-400">{formState.name[0]}</span>
-						)}
+						{formState.name.length > 0 && <Error>{formState.name[0]}</Error>}
 					</div>
 					<div className="flex flex-col gap-2">
 						<Label htmlFor="email">Email</Label>
 						<Input
+							errors={formState.email}
 							name="email"
 							id="email"
 							type="text"
 							placeholder="Email..."
 							autoComplete="email"
 						/>
-						{formState.email.length > 0 && (
-							<span className="text-xs text-red-400">{formState.email[0]}</span>
-						)}
+						{formState.email.length > 0 && <Error>{formState.email[0]}</Error>}
 					</div>
 					<div className="flex flex-col gap-2">
 						<Label htmlFor="password">Password</Label>
 						<Input
+							errors={formState.password}
 							name="password"
 							id="password"
 							type="password"
@@ -63,9 +63,7 @@ export default function Page() {
 							autoComplete="current-password"
 						/>
 						{formState.password.length > 0 && (
-							<span className="text-xs text-red-400">
-								{formState.password[0]}
-							</span>
+							<Error>{formState.password[0]}</Error>
 						)}
 					</div>
 					<div className="flex gap-1 text-sm">
