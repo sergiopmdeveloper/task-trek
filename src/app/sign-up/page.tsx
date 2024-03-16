@@ -25,7 +25,12 @@ export default function Page() {
 
 	return (
 		<main className="flex h-screen w-screen items-center justify-center">
-			<div className="w-[30rem] rounded bg-theme-black p-6">
+			<div className="relative w-[30rem] rounded bg-theme-black p-6">
+				{formState.userAlreadyExists && (
+					<div className="absolute -top-8 right-0">
+						<Error>User already exists</Error>
+					</div>
+				)}
 				<h1 className="text-4xl font-semibold text-theme-white">Sign up</h1>
 				<form className="mt-8 flex flex-col gap-5" action={formAction}>
 					<div className="flex flex-col gap-2">

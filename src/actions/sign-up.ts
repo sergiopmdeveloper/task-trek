@@ -1,7 +1,11 @@
 'use server'
 
+import prisma from '@/lib/prisma'
 import { SignUpState } from '@/types/sign-up'
 import { SignUpSchema } from '@/validation/sign-up'
+import bcrypt from 'bcrypt'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 /**
  * Sign up action.
@@ -28,10 +32,35 @@ export default async function signUp(_: SignUpState, formData: FormData) {
 		}
 	}
 
-	return {
-		name: [],
-		email: [],
-		password: [],
-		userAlreadyExists: false,
+	const existingUser = await prisma.user.findUnique({
+		where: { email: email },
+	})
+
+	if (existingUser) {
+		return {
+			name: [],
+			email: [],
+			password: [],
+			userAlreadyExists: true,
+		}
 	}
+
+	const hashedPassword = await bcrypt.hash(password, 10)
+
+	const newUser = await prisma.user.create({
+		data: {
+			name: name,
+			email: email,
+			password: hashedPassword,
+		},
+	})
+
+	cookies().set({
+		name: 'userId',
+		value: newUser.id.toString(),
+		httpOnly: true,
+		expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+	})
+
+	redirect(`/user/${newUser.id}`)
 }
