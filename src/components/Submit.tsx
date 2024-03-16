@@ -1,8 +1,8 @@
 'use client'
 
-import { useFormStatus } from 'react-dom'
 import { cn } from '@/lib/utils'
 import { LoaderCircle } from 'lucide-react'
+import { useFormStatus } from 'react-dom'
 
 /**
  * Submit component.
