@@ -25,6 +25,11 @@ export default function Page() {
 	return (
 		<main className="flex h-screen w-screen items-center justify-center px-2">
 			<div className="relative w-full rounded bg-theme-black p-6 xs:w-[30rem]">
+				{formState.invalidCredentials && (
+					<div className="absolute -top-8 right-0">
+						<Error>Invalid credentials</Error>
+					</div>
+				)}
 				<h1 className="text-3xl font-semibold text-theme-white xs:text-4xl">
 					Sign in
 				</h1>

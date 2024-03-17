@@ -1,7 +1,11 @@
 'use server'
 
+import prisma from '@/lib/prisma'
 import { SignInState } from '@/types/sign-in'
 import { SignInSchema } from '@/validation/sign-in'
+import bcrypt from 'bcrypt'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 /**
  * Sign in action.
@@ -25,9 +29,29 @@ export default async function signIn(_: SignInState, formData: FormData) {
 		}
 	}
 
-	return {
-		email: [],
-		password: [],
-		invalidCredentials: false,
+	const user = await prisma.user.findUnique({
+		where: {
+			email: email,
+		},
+	})
+
+	const invalidCredentials =
+		!user || !(await bcrypt.compare(password, user.password))
+
+	if (invalidCredentials) {
+		return {
+			email: [],
+			password: [],
+			invalidCredentials: true,
+		}
 	}
+
+	cookies().set({
+		name: 'userId',
+		value: user.id.toString(),
+		httpOnly: true,
+		expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+	})
+
+	redirect(`/user/${user.id}`)
 }
