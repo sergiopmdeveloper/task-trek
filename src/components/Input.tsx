@@ -12,7 +12,7 @@ export default function Input({ errors, ...props }: InputProps) {
 	return (
 		<input
 			className={cn(
-				'rounded bg-theme-gray px-1.5 py-1 outline outline-2',
+				'rounded bg-theme-gray px-1.5 py-1 text-sm outline outline-2 xs:text-base',
 				errors?.length ?? 0 > 0
 					? 'outline-red-400'
 					: 'focus:outline-theme-yellow',

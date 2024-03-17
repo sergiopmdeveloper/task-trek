@@ -14,7 +14,7 @@ export default function Submit() {
 	return (
 		<button
 			className={cn(
-				'flex items-center justify-center gap-1.5 rounded bg-theme-yellow px-1.5 py-1 text-theme-white',
+				'flex items-center justify-center gap-1.5 rounded bg-theme-yellow px-1.5 py-1 text-sm text-theme-white xs:text-base',
 				{
 					'hover:brightness-75': !pending,
 					'cursor-not-allowed brightness-75': pending,

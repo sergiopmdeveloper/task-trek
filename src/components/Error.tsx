@@ -7,7 +7,7 @@ import React from 'react'
  * @returns The component.
  */
 export default function Error({ children }: ErrorProps) {
-	return <span className="text-xs text-red-400">{children}</span>
+	return <span className="text-sm text-red-400 xs:text-base">{children}</span>
 }
 
 type ErrorProps = {

@@ -6,7 +6,7 @@ import React from 'react'
  */
 export default function Label({ children, ...props }: LabelProps) {
 	return (
-		<label className="text-theme-white" {...props}>
+		<label className="text-sm text-theme-white xs:text-base" {...props}>
 			{children}
 		</label>
 	)

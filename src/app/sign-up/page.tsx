@@ -24,14 +24,16 @@ export default function Page() {
 	const [formState, formAction] = useFormState(signUp, signUpState)
 
 	return (
-		<main className="flex h-screen w-screen items-center justify-center">
-			<div className="relative w-[30rem] rounded bg-theme-black p-6">
+		<main className="flex h-screen w-screen items-center justify-center px-2">
+			<div className="relative w-full rounded bg-theme-black p-6 xs:w-[30rem]">
 				{formState.userAlreadyExists && (
 					<div className="absolute -top-8 right-0">
 						<Error>User already exists</Error>
 					</div>
 				)}
-				<h1 className="text-4xl font-semibold text-theme-white">Sign up</h1>
+				<h1 className="text-3xl font-semibold text-theme-white xs:text-4xl">
+					Sign up
+				</h1>
 				<form className="mt-8 flex flex-col gap-5" action={formAction}>
 					<div className="flex flex-col gap-2">
 						<Label htmlFor="name">Name</Label>
@@ -71,7 +73,7 @@ export default function Page() {
 							<Error>{formState.password[0]}</Error>
 						)}
 					</div>
-					<div className="flex gap-1 text-sm">
+					<div className="flex flex-wrap gap-1 text-sm">
 						<span className="text-theme-gray">Already have an account?</span>
 						<Link className="text-theme-yellow underline" href="/sign-in">
 							Sign in

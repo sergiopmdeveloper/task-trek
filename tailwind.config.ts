@@ -14,6 +14,9 @@ const config: Config = {
 				'theme-gray': '#E5E5E5',
 				'theme-white': '#FFFFFF',
 			},
+			screens: {
+				xs: '480px',
+			},
 		},
 	},
 }
