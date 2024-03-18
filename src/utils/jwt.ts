@@ -1,4 +1,4 @@
-import { SignJWT } from 'jose'
+import { SignJWT, jwtVerify } from 'jose'
 
 /**
  * Retrieves the JWT secret key from the environment variables.
@@ -23,8 +23,23 @@ export async function generateJwt(): Promise<string> {
 	const token = await new SignJWT()
 		.setProtectedHeader({ alg: 'HS256' })
 		.setIssuedAt()
-		.setExpirationTime(Date.now() + 1000 * 60 * 60 * 24)
+		.setExpirationTime('1d')
 		.sign(getJwtSecret())
 
 	return token
+}
+
+/**
+ * Verifies the validity of a JWT token.
+ * @param {string} token - The JWT token to verify.
+ * @returns {Promise<boolean>} A promise of the verification result.
+ */
+export async function verifyJwtToken(token: string): Promise<boolean> {
+	try {
+		await jwtVerify(token, getJwtSecret())
+	} catch (error) {
+		return false
+	}
+
+	return true
 }

@@ -1,24 +1,31 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { verifyJwtToken } from '@/utils/jwt'
+import { deleteSessionFromApi, redirectToUserPage } from '@/utils/session'
+import { type NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
 	const path = request.nextUrl.pathname
 	const userId = request.cookies.get('userId')?.value
+	const token = request.cookies.get('token')?.value
 
 	if (['/sign-up', '/sign-in'].includes(path)) {
 		if (userId) {
-			return NextResponse.redirect(new URL(`/user/${userId}`, request.url))
+			return await redirectToUserPage(userId, request)
 		}
 	}
 
 	if (path.startsWith('/user/')) {
-		if (!userId) {
-			return NextResponse.redirect(new URL(`/sign-in`, request.url))
+		if (!userId || !token) {
+			return deleteSessionFromApi(request)
+		}
+
+		if (!(await verifyJwtToken(token))) {
+			return deleteSessionFromApi(request)
 		}
 
 		const urlUserId = path.split('/')[2]
 
 		if (userId !== urlUserId) {
-			return NextResponse.redirect(new URL(`/user/${userId}`, request.url))
+			return await redirectToUserPage(userId, request)
 		}
 	}
 }
