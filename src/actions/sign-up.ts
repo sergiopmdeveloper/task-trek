@@ -70,5 +70,5 @@ export default async function signUp(_: SignUpState, formData: FormData) {
 		httpOnly: true,
 	})
 
-	redirect(`/user/${newUser.id}`)
+	redirect(`/user/${newUser.id}?recentToken=true`)
 }

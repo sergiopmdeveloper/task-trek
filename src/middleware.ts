@@ -1,6 +1,6 @@
 import { verifyJwtToken } from '@/utils/jwt'
 import { deleteSessionFromApi, redirectToUserPage } from '@/utils/session'
-import { type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
 	const path = request.nextUrl.pathname
@@ -20,6 +20,11 @@ export async function middleware(request: NextRequest) {
 
 		if (!(await verifyJwtToken(token))) {
 			return deleteSessionFromApi(request)
+		}
+
+		if (request.nextUrl.searchParams.get('recentToken')) {
+			request.nextUrl.searchParams.delete('recentToken')
+			return NextResponse.redirect(new URL(`/user/${userId}`, request.url))
 		}
 
 		const urlUserId = path.split('/')[2]
