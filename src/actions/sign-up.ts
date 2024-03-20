@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/prisma'
 import { SignUpState } from '@/types/sign-up'
+import { generateJwt } from '@/utils/jwt'
 import { SignUpSchema } from '@/validation/sign-up'
 import bcrypt from 'bcrypt'
 import { cookies } from 'next/headers'
@@ -55,12 +56,19 @@ export default async function signUp(_: SignUpState, formData: FormData) {
 		},
 	})
 
+	const token = await generateJwt()
+
 	cookies().set({
 		name: 'userId',
 		value: newUser.id.toString(),
 		httpOnly: true,
-		expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
 	})
 
-	redirect(`/user/${newUser.id}`)
+	cookies().set({
+		name: 'token',
+		value: token,
+		httpOnly: true,
+	})
+
+	redirect(`/user/${newUser.id}?recentToken=true`)
 }
