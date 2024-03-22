@@ -1,9 +1,7 @@
 'use client'
 
 import signOut from '@/actions/sign-out'
-import getUser from '@/services/getUser'
-import { UserResponse } from '@/types/user'
-import { useEffect, useState } from 'react'
+import useUser from '@/hooks/useUser'
 
 /**
  * User page component.
@@ -19,16 +17,7 @@ export default function Page({
 	const userId = params.id
 	const token = searchParams.token
 
-	const [user, setUser] = useState<UserResponse>()
-
-	useEffect(() => {
-		async function getUserWrapper() {
-			const userData = await getUser(userId, token)
-			setUser(userData)
-		}
-
-		getUserWrapper()
-	}, [])
+	const { user } = useUser(userId, token)
 
 	if (user) {
 		return (
