@@ -1,5 +1,6 @@
 'use client'
 
+import signOut from '@/actions/sign-out'
 import getUser from '@/services/getUser'
 import { UserResponse } from '@/types/user'
 import { useEffect, useState } from 'react'
@@ -32,7 +33,16 @@ export default function Page({
 	if (user) {
 		return (
 			<main>
-				<h1>Hello {user.name}</h1>
+				<header className="h-20 w-full bg-theme-black">
+					<div className="mx-auto flex h-full max-w-screen-xl items-center justify-between">
+						<h1 className="text-lg text-theme-white">Hello {user.name}</h1>
+						<form action={signOut}>
+							<button className="rounded bg-red-700 px-2 py-1 text-theme-white hover:brightness-75">
+								Sign out
+							</button>
+						</form>
+					</div>
+				</header>
 			</main>
 		)
 	}
