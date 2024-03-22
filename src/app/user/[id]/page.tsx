@@ -17,9 +17,9 @@ export default function Page({
 	const userId = params.id
 	const token = searchParams.token
 
-	const { user } = useUser(userId, token)
+	const user = useUser(userId, token)
 
-	if (user) {
+	if (user.name && user.email) {
 		return (
 			<main>
 				<header className="h-20 w-full bg-theme-black">

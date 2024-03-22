@@ -1,6 +1,6 @@
 import getUser from '@/services/getUser'
-import { type UserResponse } from '@/types/user'
-import { useEffect, useState } from 'react'
+import { useUserStore } from '@/stores/userStore'
+import { useEffect } from 'react'
 
 /**
  * User hook.
@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
  * @returns The user state and the setter.
  */
 export default function useUser(userId: string, token: string) {
-	const [user, setUser] = useState<UserResponse>()
+	const setUser = useUserStore((state) => state.setUser)
 
 	useEffect(() => {
 		async function getUserWrapper() {
@@ -17,7 +17,10 @@ export default function useUser(userId: string, token: string) {
 		}
 
 		getUserWrapper()
-	}, [])
+	}, [userId, token, setUser])
 
-	return { user, setUser }
+	return {
+		name: useUserStore((state) => state.name),
+		email: useUserStore((state) => state.email),
+	}
 }
