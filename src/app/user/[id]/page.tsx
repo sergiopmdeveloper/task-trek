@@ -1,29 +1,33 @@
 'use client'
 
-import refreshToken from '@/actions/refresh-token'
-import { useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import signOut from '@/actions/sign-out'
+import Header from '@/components/Header'
+import Submit from '@/components/Submit'
+import useUser from '@/hooks/useUser'
 
 /**
  * User page component.
  * @returns The page component.
  */
-export default function Page() {
-	const searchParams = useSearchParams()
+export default function Page({
+	params,
+	searchParams,
+}: {
+	params: { id: string }
+	searchParams: { token: string }
+}) {
+	const user = useUser(params.id, searchParams.token)
 
-	useEffect(() => {
-		async function refreshTokenWrapper() {
-			await refreshToken()
-		}
-
-		if (!searchParams.get('recentToken')) {
-			refreshTokenWrapper()
-		}
-	}, [searchParams])
-
-	return (
-		<main>
-			<h1>User page</h1>
-		</main>
-	)
+	if (user.name && user.email) {
+		return (
+			<main>
+				<Header>
+					<h1 className="text-lg text-theme-white">Hello {user.name}</h1>
+					<form action={signOut}>
+						<Submit type="destructive">Sign out</Submit>
+					</form>
+				</Header>
+			</main>
+		)
+	}
 }

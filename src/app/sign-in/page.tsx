@@ -66,7 +66,7 @@ export default function Page() {
 							Sign up
 						</Link>
 					</div>
-					<Submit />
+					<Submit>Send</Submit>
 				</form>
 			</div>
 		</main>

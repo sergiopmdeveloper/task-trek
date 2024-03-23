@@ -61,5 +61,5 @@ export default async function signIn(_: SignInState, formData: FormData) {
 		httpOnly: true,
 	})
 
-	redirect(`/user/${user.id}?recentToken=true`)
+	redirect(`/user/${user.id}?token=${token}`)
 }
