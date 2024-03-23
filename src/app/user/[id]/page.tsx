@@ -1,6 +1,7 @@
 'use client'
 
 import signOut from '@/actions/sign-out'
+import Header from '@/components/Header'
 import useUser from '@/hooks/useUser'
 
 /**
@@ -14,24 +15,19 @@ export default function Page({
 	params: { id: string }
 	searchParams: { token: string }
 }) {
-	const userId = params.id
-	const token = searchParams.token
-
-	const user = useUser(userId, token)
+	const user = useUser(params.id, searchParams.token)
 
 	if (user.name && user.email) {
 		return (
 			<main>
-				<header className="h-20 w-full bg-theme-black">
-					<div className="mx-auto flex h-full max-w-screen-xl items-center justify-between">
-						<h1 className="text-lg text-theme-white">Hello {user.name}</h1>
-						<form action={signOut}>
-							<button className="rounded bg-red-700 px-2 py-1 text-theme-white hover:brightness-75">
-								Sign out
-							</button>
-						</form>
-					</div>
-				</header>
+				<Header>
+					<h1 className="text-lg text-theme-white">Hello {user.name}</h1>
+					<form action={signOut}>
+						<button className="rounded bg-red-700 px-2 py-1 text-theme-white hover:brightness-75">
+							Sign out
+						</button>
+					</form>
+				</Header>
 			</main>
 		)
 	}
