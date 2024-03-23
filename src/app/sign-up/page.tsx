@@ -79,7 +79,7 @@ export default function Page() {
 							Sign in
 						</Link>
 					</div>
-					<Submit />
+					<Submit>Send</Submit>
 				</form>
 			</div>
 		</main>

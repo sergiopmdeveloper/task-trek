@@ -2,6 +2,7 @@
 
 import signOut from '@/actions/sign-out'
 import Header from '@/components/Header'
+import Submit from '@/components/Submit'
 import useUser from '@/hooks/useUser'
 
 /**
@@ -23,9 +24,7 @@ export default function Page({
 				<Header>
 					<h1 className="text-lg text-theme-white">Hello {user.name}</h1>
 					<form action={signOut}>
-						<button className="rounded bg-red-700 px-2 py-1 text-theme-white hover:brightness-75">
-							Sign out
-						</button>
+						<Submit type="destructive">Sign out</Submit>
 					</form>
 				</Header>
 			</main>
