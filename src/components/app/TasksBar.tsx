@@ -1,7 +1,8 @@
-import { Plus } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
 import { useState } from 'react'
 import Input from '../Input'
 import Submit from '../Submit'
+import Textarea from '../Textarea'
 
 /**
  * Tasks bar component.
@@ -21,7 +22,11 @@ export default function TasksBar() {
 						className="flex h-7 w-7 cursor-pointer items-center justify-center rounded bg-theme-gray hover:brightness-75"
 						onClick={showCloseForm}
 					>
-						<Plus className="h-6 w-6 stroke-theme-black" />
+						{!addTaskForm ? (
+							<Plus className="h-6 w-6 stroke-theme-black" />
+						) : (
+							<X className="h-6 w-6 stroke-theme-black" />
+						)}
 					</div>
 					{addTaskForm && (
 						<form className="absolute right-0 top-20 flex w-80 flex-col rounded bg-theme-white p-4">
@@ -47,8 +52,7 @@ export default function TasksBar() {
 									type="date"
 									autoComplete="off"
 								/>
-								<textarea
-									className="rounded bg-theme-gray px-1.5 py-1 text-sm outline outline-2 xs:text-base"
+								<Textarea
 									name="description"
 									id="description"
 									rows={4}
