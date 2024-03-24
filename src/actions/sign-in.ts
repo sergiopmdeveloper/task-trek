@@ -52,14 +52,12 @@ export default async function signIn(_: SignInState, formData: FormData) {
 	cookies().set({
 		name: 'userId',
 		value: user.id.toString(),
-		httpOnly: true,
 	})
 
 	cookies().set({
 		name: 'token',
 		value: token,
-		httpOnly: true,
 	})
 
-	redirect(`/user/${user.id}?token=${token}`)
+	redirect(`/user/${user.id}`)
 }

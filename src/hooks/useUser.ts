@@ -8,7 +8,10 @@ import { useEffect } from 'react'
  * @param {token} token - The authentication token.
  * @returns The user state and the setter.
  */
-export default function useUser(userId: string, token: string) {
+export default function useUser(
+	userId: string | undefined,
+	token: string | undefined,
+) {
 	const setUser = useUserStore((state) => state.setUser)
 
 	useEffect(() => {
