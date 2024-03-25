@@ -61,14 +61,12 @@ export default async function signUp(_: SignUpState, formData: FormData) {
 	cookies().set({
 		name: 'userId',
 		value: newUser.id.toString(),
-		httpOnly: true,
 	})
 
 	cookies().set({
 		name: 'token',
 		value: token,
-		httpOnly: true,
 	})
 
-	redirect(`/user/${newUser.id}?token=${token}`)
+	redirect(`/user/${newUser.id}`)
 }

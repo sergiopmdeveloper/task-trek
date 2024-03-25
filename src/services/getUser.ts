@@ -8,8 +8,8 @@ import { type ErrorResponse, type UserResponse } from '@/types/user'
  * @throws An error if the request fails.
  */
 export default async function getUser(
-	userId: string,
-	token: string,
+	userId: string | undefined,
+	token: string | undefined,
 ): Promise<UserResponse> {
 	const response = await fetch(`/api/user?userId=${userId}&token=${token}`)
 
