@@ -1,5 +1,10 @@
+'use server'
+
+import prisma from '@/lib/prisma'
 import { AddTaskState } from '@/types/tasks'
 import { AddTaskSchema } from '@/validation/tasks'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 /**
  * Add task action.
@@ -29,10 +34,17 @@ export default async function addTask(_: AddTaskState, formData: FormData) {
 		}
 	}
 
-	return {
-		name: [],
-		priority: [],
-		deadline: [],
-		description: [],
-	}
+	const userId = cookies().get('userId')?.value as string
+
+	await prisma.task.create({
+		data: {
+			name: name,
+			priority: priority,
+			deadline: new Date(deadline),
+			description: description,
+			userId: userId,
+		},
+	})
+
+	redirect(`user/${userId}`)
 }
