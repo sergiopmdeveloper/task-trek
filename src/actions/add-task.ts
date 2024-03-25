@@ -4,7 +4,6 @@ import prisma from '@/lib/prisma'
 import { AddTaskState } from '@/types/tasks'
 import { AddTaskSchema } from '@/validation/tasks'
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 
 /**
  * Add task action.
@@ -46,5 +45,10 @@ export default async function addTask(_: AddTaskState, formData: FormData) {
 		},
 	})
 
-	redirect(`user/${userId}`)
+	return {
+		name: [],
+		priority: [],
+		deadline: [],
+		description: [],
+	}
 }

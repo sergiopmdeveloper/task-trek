@@ -8,7 +8,7 @@ import { Plus, X } from 'lucide-react'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
 
-const addTaskState: AddTaskState = {
+const addTaskInitialState: AddTaskState = {
 	name: [],
 	priority: [],
 	deadline: [],
@@ -21,7 +21,7 @@ const addTaskState: AddTaskState = {
  */
 export default function TasksBar() {
 	const [addTaskForm, setAddTaskForm] = useState(false)
-	const [formState, formAction] = useFormState(addTask, addTaskState)
+	const [formState, formAction] = useFormState(addTask, addTaskInitialState)
 
 	const showCloseForm = () => setAddTaskForm(!addTaskForm)
 
@@ -43,7 +43,10 @@ export default function TasksBar() {
 					{addTaskForm && (
 						<form
 							className="absolute right-0 top-20 flex w-80 flex-col rounded bg-theme-white p-4"
-							action={formAction}
+							action={async (formData) => {
+								formAction(formData)
+								if (formState === addTaskInitialState) showCloseForm()
+							}}
 						>
 							<h1 className="mb-4 text-xl font-semibold">Add task</h1>
 							<div className="mb-4 flex flex-col gap-4">
