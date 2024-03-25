@@ -42,23 +42,25 @@ export default function TasksBar() {
 		<>
 			<div className="mt-4 h-16 w-full px-4">
 				<div className="relative mx-auto flex h-full w-full max-w-screen-xl items-center justify-between rounded-xl bg-theme-yellow px-4">
-					<h1 className="text-lg font-semibold text-theme-white">Tasks</h1>
+					<h1 className="font-semibold text-theme-white xs:text-lg">Tasks</h1>
 					<div
-						className="flex h-7 w-7 cursor-pointer items-center justify-center rounded bg-theme-gray hover:brightness-75"
+						className="flex h-6 w-6 cursor-pointer items-center justify-center rounded bg-theme-gray hover:brightness-75 xs:h-7 xs:w-7"
 						onClick={showCloseForm}
 					>
 						{!addTaskForm ? (
-							<Plus className="h-6 w-6 stroke-theme-black" />
+							<Plus className="h-5 w-5 stroke-theme-black xs:h-6 xs:w-6" />
 						) : (
-							<X className="h-6 w-6 stroke-theme-black" />
+							<X className="h-5 w-5 stroke-theme-black xs:h-6 xs:w-6" />
 						)}
 					</div>
 					{addTaskForm && (
 						<form
-							className="absolute right-0 top-20 flex w-80 flex-col rounded bg-theme-white p-4"
+							className="absolute right-0 top-20 flex w-60 flex-col rounded bg-theme-white p-4 xs:w-80"
 							action={formAction}
 						>
-							<h1 className="mb-4 text-xl font-semibold">Add task</h1>
+							<h1 className="mb-4 text-lg font-semibold xs:text-xl">
+								Add task
+							</h1>
 							<div className="mb-4 flex flex-col gap-4">
 								<div className="flex flex-col gap-1">
 									<Input

@@ -18,7 +18,7 @@ export default function Page() {
 		return (
 			<main>
 				<Header>
-					<h1 className="text-lg text-theme-white">Hello {user.name}</h1>
+					<h1 className="text-theme-white xs:text-lg">Hello {user.name}</h1>
 					<form action={signOut}>
 						<Submit type="destructive">Sign out</Submit>
 					</form>
