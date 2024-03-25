@@ -1,11 +1,12 @@
 import addTask from '@/actions/add-task'
 import Error from '@/components/Error'
 import Input from '@/components/Input'
+import Select from '@/components/Select'
 import Submit from '@/components/Submit'
 import Textarea from '@/components/Textarea'
 import { AddTaskState } from '@/types/tasks'
 import { Plus, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFormState } from 'react-dom'
 
 const addTaskInitialState: AddTaskState = {
@@ -22,8 +23,20 @@ const addTaskInitialState: AddTaskState = {
 export default function TasksBar() {
 	const [addTaskForm, setAddTaskForm] = useState(false)
 	const [formState, formAction] = useFormState(addTask, addTaskInitialState)
+	const [pageLoad, setPageLoad] = useState(true)
 
 	const showCloseForm = () => setAddTaskForm(!addTaskForm)
+
+	useEffect(() => {
+		if (pageLoad) {
+			setPageLoad(false)
+			return
+		}
+
+		if (JSON.stringify(formState) === JSON.stringify(addTaskInitialState)) {
+			showCloseForm()
+		}
+	}, [formState])
 
 	return (
 		<>
@@ -43,10 +56,7 @@ export default function TasksBar() {
 					{addTaskForm && (
 						<form
 							className="absolute right-0 top-20 flex w-80 flex-col rounded bg-theme-white p-4"
-							action={async (formData) => {
-								formAction(formData)
-								if (formState === addTaskInitialState) showCloseForm()
-							}}
+							action={formAction}
 						>
 							<h1 className="mb-4 text-xl font-semibold">Add task</h1>
 							<div className="mb-4 flex flex-col gap-4">
@@ -64,14 +74,16 @@ export default function TasksBar() {
 									)}
 								</div>
 								<div className="flex flex-col gap-1">
-									<Input
+									<Select
 										errors={formState.priority}
 										name="priority"
 										id="priority"
-										type="text"
-										placeholder="Priority..."
 										autoComplete="off"
-									/>
+									>
+										<option value="High">High</option>
+										<option value="Medium">Medium</option>
+										<option value="Low">Low</option>
+									</Select>
 									{formState.priority.length > 0 && (
 										<Error>{formState.priority[0]}</Error>
 									)}

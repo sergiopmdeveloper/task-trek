@@ -12,7 +12,7 @@ import { cookies } from 'next/headers'
  */
 export default async function addTask(_: AddTaskState, formData: FormData) {
 	const name = formData.get('name') as string
-	const priority = formData.get('priority') as string
+	const priority = (formData.get('priority') ?? '') as string
 	const deadline = formData.get('deadline') as string
 	const description = formData.get('description') as string
 
