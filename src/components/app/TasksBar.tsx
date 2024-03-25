@@ -1,8 +1,19 @@
+import addTask from '@/actions/add-task'
+import Error from '@/components/Error'
+import Input from '@/components/Input'
+import Submit from '@/components/Submit'
+import Textarea from '@/components/Textarea'
+import { AddTaskState } from '@/types/tasks'
 import { Plus, X } from 'lucide-react'
 import { useState } from 'react'
-import Input from '../Input'
-import Submit from '../Submit'
-import Textarea from '../Textarea'
+import { useFormState } from 'react-dom'
+
+const addTaskState: AddTaskState = {
+	name: [],
+	priority: [],
+	deadline: [],
+	description: [],
+}
 
 /**
  * Tasks bar component.
@@ -10,6 +21,7 @@ import Textarea from '../Textarea'
  */
 export default function TasksBar() {
 	const [addTaskForm, setAddTaskForm] = useState(false)
+	const [formState, formAction] = useFormState(addTask, addTaskState)
 
 	const showCloseForm = () => setAddTaskForm(!addTaskForm)
 
@@ -29,36 +41,63 @@ export default function TasksBar() {
 						)}
 					</div>
 					{addTaskForm && (
-						<form className="absolute right-0 top-20 flex w-80 flex-col rounded bg-theme-white p-4">
+						<form
+							className="absolute right-0 top-20 flex w-80 flex-col rounded bg-theme-white p-4"
+							action={formAction}
+						>
 							<h1 className="mb-4 text-xl font-semibold">Add task</h1>
 							<div className="mb-4 flex flex-col gap-4">
-								<Input
-									name="name"
-									id="name"
-									type="text"
-									placeholder="Name..."
-									autoComplete="off"
-								/>
-								<Input
-									name="priority"
-									id="priority"
-									type="text"
-									placeholder="Priority..."
-									autoComplete="off"
-								/>
-								<Input
-									name="deadline"
-									id="deadline"
-									type="date"
-									autoComplete="off"
-								/>
-								<Textarea
-									name="description"
-									id="description"
-									rows={4}
-									placeholder="Description"
-									autoComplete="off"
-								/>
+								<div className="flex flex-col gap-1">
+									<Input
+										errors={formState.name}
+										name="name"
+										id="name"
+										type="text"
+										placeholder="Name..."
+										autoComplete="off"
+									/>
+									{formState.name.length > 0 && (
+										<Error>{formState.name[0]}</Error>
+									)}
+								</div>
+								<div className="flex flex-col gap-1">
+									<Input
+										errors={formState.priority}
+										name="priority"
+										id="priority"
+										type="text"
+										placeholder="Priority..."
+										autoComplete="off"
+									/>
+									{formState.priority.length > 0 && (
+										<Error>{formState.priority[0]}</Error>
+									)}
+								</div>
+								<div className="flex flex-col gap-1">
+									<Input
+										errors={formState.deadline}
+										name="deadline"
+										id="deadline"
+										type="date"
+										autoComplete="off"
+									/>
+									{formState.deadline.length > 0 && (
+										<Error>{formState.deadline[0]}</Error>
+									)}
+								</div>
+								<div className="flex flex-col gap-1">
+									<Textarea
+										errors={formState.description}
+										name="description"
+										id="description"
+										rows={4}
+										placeholder="Description"
+										autoComplete="off"
+									/>
+									{formState.description.length > 0 && (
+										<Error>{formState.description[0]}</Error>
+									)}
+								</div>
 							</div>
 							<Submit>Send</Submit>
 						</form>
