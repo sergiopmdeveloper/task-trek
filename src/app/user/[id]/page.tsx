@@ -3,8 +3,8 @@
 import signOut from '@/actions/sign-out'
 import Header from '@/components/Header'
 import Submit from '@/components/Submit'
+import Tasks from '@/components/app/Tasks'
 import TasksBar from '@/components/app/TasksBar'
-import useTasks from '@/hooks/useTasks'
 import useUser from '@/hooks/useUser'
 import Cookies from 'js-cookie'
 
@@ -14,9 +14,8 @@ import Cookies from 'js-cookie'
  */
 export default function Page() {
 	const user = useUser(Cookies.get('userId'), Cookies.get('token'))
-	const tasks = useTasks(Cookies.get('userId'), Cookies.get('token'))
 
-	if (user.name && user.email && tasks.length > 0) {
+	if (user.name && user.email) {
 		return (
 			<main>
 				<Header>
@@ -26,6 +25,7 @@ export default function Page() {
 					</form>
 				</Header>
 				<TasksBar />
+				<Tasks />
 			</main>
 		)
 	}
