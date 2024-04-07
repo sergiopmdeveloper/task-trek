@@ -1,10 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-
-interface PopoverProps<T> {
-	formState: T
-	initialState: T
-	children: React.ReactNode
-}
+import React, { createContext, useContext, useState } from 'react'
 
 interface PopoverContextValue {
 	popover: boolean
@@ -15,30 +9,11 @@ const PopoverContext = createContext<PopoverContextValue | null>(null)
 
 /**
  * Popover component.
- * @param {PopoverProps} props The props of the component.
- * @param {T} props.formState The form state.
- * @param {T} props.initialState The initial state.
- * @param {React.ReactNode} props.children The children of the component.
+ * @param {React.ReactNode} children The children of the component.
  * @returns The component.
  */
-export default function Popover<T>({
-	formState,
-	initialState,
-	children,
-}: PopoverProps<T>) {
+export default function Popover({ children }: { children: React.ReactNode }) {
 	const [popover, setPopover] = useState(false)
-	const [pageLoad, setPageLoad] = useState(true)
-
-	useEffect(() => {
-		if (pageLoad) {
-			setPageLoad(false)
-			return
-		}
-
-		if (JSON.stringify(formState) === JSON.stringify(initialState)) {
-			setPopover(false)
-		}
-	}, [formState])
 
 	return (
 		<PopoverContext.Provider value={{ popover, setPopover }}>

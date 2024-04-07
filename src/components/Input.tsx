@@ -23,5 +23,5 @@ export default function Input({ errors, ...props }: InputProps) {
 }
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-	errors?: string[]
+	errors?: string[] | undefined
 }
