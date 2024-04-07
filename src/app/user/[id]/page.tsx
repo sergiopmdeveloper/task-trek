@@ -3,6 +3,7 @@
 import signOut from '@/actions/sign-out'
 import Header from '@/components/Header'
 import Submit from '@/components/Submit'
+import Tasks from '@/components/app/Tasks'
 import TasksBar from '@/components/app/TasksBar'
 import useUser from '@/hooks/useUser'
 import Cookies from 'js-cookie'
@@ -24,6 +25,7 @@ export default function Page() {
 					</form>
 				</Header>
 				<TasksBar />
+				<Tasks />
 			</main>
 		)
 	}
