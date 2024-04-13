@@ -1,17 +1,20 @@
+import deleteTask from '@/actions/delete-task'
+import finishTask from '@/actions/finish-task'
 import Icon from '@/components/Icon'
 import Table from '@/components/Table'
 import useTasks from '@/hooks/useTasks'
 import Cookies from 'js-cookie'
 import Popover from '../Popover'
 import Submit from '../Submit'
-import deleteTask from '@/actions/delete-task'
 
 /**
  * Tasks component.
  * @returns The component.
  */
 export default function Tasks() {
-	const tasks = useTasks(Cookies.get('userId'), Cookies.get('token'))
+	let tasks = useTasks(Cookies.get('userId'), Cookies.get('token')).filter(
+		(task) => !task.done,
+	)
 
 	return (
 		<Table>
@@ -32,7 +35,22 @@ export default function Tasks() {
 							{new Date(task.deadline).toLocaleDateString()}
 						</Table.Cell>
 						<Table.Cell classname="flex gap-2">
-							<Icon type="check" />
+							<Popover>
+								<Popover.trigger>
+									<Icon type="check" />
+								</Popover.trigger>
+								<Popover.Content>
+									<form
+										className="flex w-max items-center gap-2 rounded bg-theme-white p-2"
+										action={() => finishTask(task.id)}
+									>
+										<h1 className="text-base text-theme-black">
+											Are you sure?
+										</h1>
+										<Submit>Mark as done</Submit>
+									</form>
+								</Popover.Content>
+							</Popover>
 							<Icon type="edit" />
 							<Popover>
 								<Popover.trigger>

@@ -8,7 +8,7 @@ import React from 'react'
  */
 export default function Table({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="mt-12 w-full overflow-x-auto px-4">
+		<div className="mt-12 w-full overflow-x-auto px-4 pb-14">
 			<table className="mx-auto w-full max-w-screen-xl text-left text-sm">
 				{children}
 			</table>
