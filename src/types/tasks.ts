@@ -11,6 +11,7 @@ export type Task = {
 	priority: string
 	deadline: Date
 	description: string
+	done: boolean
 }
 
 export type TaskResponse = Task[]

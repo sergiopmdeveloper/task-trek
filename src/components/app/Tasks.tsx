@@ -11,7 +11,8 @@ import deleteTask from '@/actions/delete-task'
  * @returns The component.
  */
 export default function Tasks() {
-	const tasks = useTasks(Cookies.get('userId'), Cookies.get('token'))
+	let tasks = useTasks(Cookies.get('userId'), Cookies.get('token'))
+	tasks = tasks.filter((task) => !task.done)
 
 	return (
 		<Table>
