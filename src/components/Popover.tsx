@@ -58,6 +58,6 @@ Popover.Content = function PopoverContent({
 	const { popover } = useContext(PopoverContext)!
 
 	if (popover) {
-		return <div className="absolute right-0 top-10">{children}</div>
+		return <div className="absolute right-0 top-10 z-10">{children}</div>
 	}
 }

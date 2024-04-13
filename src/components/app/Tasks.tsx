@@ -2,6 +2,9 @@ import Icon from '@/components/Icon'
 import Table from '@/components/Table'
 import useTasks from '@/hooks/useTasks'
 import Cookies from 'js-cookie'
+import Popover from '../Popover'
+import Submit from '../Submit'
+import deleteTask from '@/actions/delete-task'
 
 /**
  * Tasks component.
@@ -31,7 +34,22 @@ export default function Tasks() {
 						<Table.Cell classname="flex gap-2">
 							<Icon type="check" />
 							<Icon type="edit" />
-							<Icon type="trash" />
+							<Popover>
+								<Popover.trigger>
+									<Icon type="trash" />
+								</Popover.trigger>
+								<Popover.Content>
+									<form
+										className="flex w-max items-center gap-2 rounded bg-theme-white p-2"
+										action={() => deleteTask(task.id)}
+									>
+										<h1 className="text-base text-theme-black">
+											Are you sure?
+										</h1>
+										<Submit>Delete</Submit>
+									</form>
+								</Popover.Content>
+							</Popover>
 						</Table.Cell>
 					</Table.Row>
 				))}

@@ -25,7 +25,7 @@ export default function TasksBar() {
 
 	return (
 		<>
-			<div className="sticky top-4 mt-4 h-16 w-full px-4">
+			<div className="sticky top-4 z-20 mt-4 h-16 w-full px-4">
 				<div className="relative mx-auto flex h-full w-full max-w-screen-xl items-center justify-between rounded-xl bg-theme-yellow px-4">
 					<h1 className="font-semibold text-theme-white xs:text-lg">Tasks</h1>
 					<Popover>
