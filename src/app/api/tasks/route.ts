@@ -51,6 +51,7 @@ export async function GET(
 		priority: task.priority,
 		deadline: task.deadline,
 		description: task.description,
+		done: task.done,
 	}))
 
 	return NextResponse.json(tasksData)
