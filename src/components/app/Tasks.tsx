@@ -32,7 +32,19 @@ export default function Tasks() {
 							{new Date(task.deadline).toLocaleDateString()}
 						</Table.Cell>
 						<Table.Cell classname="flex gap-2">
-							<Icon type="check" />
+							<Popover>
+								<Popover.trigger>
+									<Icon type="check" />
+								</Popover.trigger>
+								<Popover.Content>
+									<form className="flex w-max items-center gap-2 rounded bg-theme-white p-2">
+										<h1 className="text-base text-theme-black">
+											Are you sure?
+										</h1>
+										<Submit>Mark as done</Submit>
+									</form>
+								</Popover.Content>
+							</Popover>
 							<Icon type="edit" />
 							<Popover>
 								<Popover.trigger>
