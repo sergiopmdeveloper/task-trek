@@ -4,6 +4,7 @@ import useTasks from '@/hooks/useTasks'
 import Cookies from 'js-cookie'
 import Popover from '../Popover'
 import Submit from '../Submit'
+import deleteTask from '@/actions/delete-task'
 
 /**
  * Tasks component.
@@ -38,7 +39,10 @@ export default function Tasks() {
 									<Icon type="trash" />
 								</Popover.trigger>
 								<Popover.Content>
-									<form className="flex h-12 w-48 items-center justify-center gap-2 rounded bg-theme-white">
+									<form
+										className="flex w-max items-center gap-2 rounded bg-theme-white p-2"
+										action={() => deleteTask(task.id)}
+									>
 										<h1 className="text-base text-theme-black">
 											Are you sure?
 										</h1>
