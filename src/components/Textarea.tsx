@@ -12,7 +12,7 @@ export default function Textarea({ errors, ...props }: TextareaProps) {
 	return (
 		<textarea
 			className={cn(
-				'rounded bg-theme-gray px-1.5 py-1 text-sm outline outline-2 xs:text-base',
+				'rounded bg-theme-gray px-1.5 py-1 text-sm text-theme-black outline outline-2 outline-theme-black xs:text-base',
 				errors?.length ?? 0 > 0
 					? 'outline-red-400'
 					: 'focus:outline-theme-yellow',
