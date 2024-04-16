@@ -1,13 +1,11 @@
 import deleteTask from '@/actions/delete-task'
 import finishTask from '@/actions/finish-task'
 import Icon from '@/components/Icon'
-import Input from '@/components/Input'
 import Modal from '@/components/Modal'
 import Popover from '@/components/Popover'
-import Select from '@/components/Select'
 import Submit from '@/components/Submit'
 import Table from '@/components/Table'
-import Textarea from '@/components/Textarea'
+import EditTask from '@/components/app/EditTask'
 import useTasks from '@/hooks/useTasks'
 import Cookies from 'js-cookie'
 
@@ -60,51 +58,7 @@ export default function Tasks() {
 									<Icon type="edit" />
 								</Modal.trigger>
 								<Modal.Content>
-									<form className="flex w-60 flex-col rounded bg-theme-white p-4 xs:w-80">
-										<h1 className="mb-4 text-lg font-semibold text-theme-black xs:text-xl">
-											Add task
-										</h1>
-										<div className="mb-4 flex flex-col gap-4">
-											<div className="flex flex-col gap-1">
-												<Input
-													name="name"
-													id="name"
-													type="text"
-													placeholder="Name..."
-													autoComplete="off"
-												/>
-											</div>
-											<div className="flex flex-col gap-1">
-												<Select
-													name="priority"
-													id="priority"
-													autoComplete="off"
-												>
-													<option value="High">High</option>
-													<option value="Medium">Medium</option>
-													<option value="Low">Low</option>
-												</Select>
-											</div>
-											<div className="flex flex-col gap-1">
-												<Input
-													name="deadline"
-													id="deadline"
-													type="date"
-													autoComplete="off"
-												/>
-											</div>
-											<div className="flex flex-col gap-1">
-												<Textarea
-													name="description"
-													id="description"
-													rows={4}
-													placeholder="Description"
-													autoComplete="off"
-												/>
-											</div>
-										</div>
-										<Submit>Send</Submit>
-									</form>
+									<EditTask task={task} />
 								</Modal.Content>
 							</Modal>
 							<Popover>
