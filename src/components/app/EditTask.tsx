@@ -14,8 +14,18 @@ const editTaskInitialState: AddTaskState = {
 	description: [],
 }
 
+/**
+ * Edit task component.
+ * @param {Task} task - The task.
+ * @returns The component.
+ */
 export default function EditTask({ task }: { task: Task }) {
-	const [formState, formAction] = useFormState(editTask, editTaskInitialState)
+	const editTaskWithId = editTask.bind(null, task.id)
+
+	const [formState, formAction] = useFormState(
+		editTaskWithId,
+		editTaskInitialState,
+	)
 
 	return (
 		<form
