@@ -1,11 +1,13 @@
 import deleteTask from '@/actions/delete-task'
 import finishTask from '@/actions/finish-task'
 import Icon from '@/components/Icon'
+import Modal from '@/components/Modal'
+import Popover from '@/components/Popover'
+import Submit from '@/components/Submit'
 import Table from '@/components/Table'
+import EditTask from '@/components/app/EditTask'
 import useTasks from '@/hooks/useTasks'
 import Cookies from 'js-cookie'
-import Popover from '../Popover'
-import Submit from '../Submit'
 
 /**
  * Tasks component.
@@ -51,7 +53,14 @@ export default function Tasks() {
 									</form>
 								</Popover.Content>
 							</Popover>
-							<Icon type="edit" />
+							<Modal>
+								<Modal.trigger>
+									<Icon type="edit" />
+								</Modal.trigger>
+								<Modal.Content>
+									<EditTask task={task} />
+								</Modal.Content>
+							</Modal>
 							<Popover>
 								<Popover.trigger>
 									<Icon type="trash" />
